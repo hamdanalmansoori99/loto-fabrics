@@ -112,11 +112,12 @@ export default function PrintPicker() {
       </div>
 
       {/* Flat thumbnail grid — every swatch is its own button.
-          Parent has no height constraint here; the ancestor <aside> handles
-          sidebar scrolling on desktop, page scroll handles mobile. Swatches
-          use padding-top trick for width-driven height — bypasses the
-          Safari aspect-ratio-on-grid-buttons collapse bug. */}
-      <div className="grid grid-cols-3 gap-2">
+          Swatches use padding-top trick for width-driven height (bypasses
+          the Safari aspect-ratio-on-grid-buttons collapse bug).
+          Since child heights are now deterministic (not aspect-ratio), we
+          can safely constrain the parent with max-h + overflow-y without
+          Safari trying to distribute the height across rows. */}
+      <div className="grid grid-cols-3 gap-2 max-h-[55vh] lg:max-h-[480px] overflow-y-auto pe-1 no-scrollbar">
         {swatchesInCat.map((swatch) => {
           const isSelected = swatch.sku === fabricPrintSku;
           return (
