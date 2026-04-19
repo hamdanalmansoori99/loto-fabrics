@@ -117,13 +117,13 @@ export default function DemoPage() {
           {/* Fabric */}
           <section className="py-4 border-b border-border/50">
             <h3 className="label-xs text-bronze mb-3">{t("section_fabric")}</h3>
-            <div className="grid grid-cols-3 lg:grid-cols-4 gap-1.5">
+            <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-4 gap-2">
               {Object.entries(FABRIC_CONFIGS).map(([key, config]) => (
                 <button
                   key={key}
                   onClick={() => setFabricType(key)}
                   className={cn(
-                    "px-2 py-2.5 text-xs border transition-all",
+                    "px-2 py-3 text-xs border transition-all min-h-[44px]",
                     fabricType === key
                       ? "border-espresso bg-espresso text-cream"
                       : "border-border hover:border-espresso"
@@ -144,7 +144,7 @@ export default function DemoPage() {
           {/* Colour */}
           <section className="py-4 border-b border-border/50">
             <h3 className="label-xs text-bronze mb-3">{t("section_color")}</h3>
-            <div className="grid grid-cols-8 gap-1.5">
+            <div className="grid grid-cols-6 sm:grid-cols-8 gap-2">
               {PRESET_COLORS.map((color) => (
                 <button
                   key={color}
@@ -152,10 +152,10 @@ export default function DemoPage() {
                   className={cn(
                     "w-full aspect-square transition-transform hover:scale-110",
                     baseColor === color
-                      ? "ring-2 ring-espresso ring-offset-2 ring-offset-background scale-110"
+                      ? "ring-2 ring-espresso ring-offset-2 ring-offset-background scale-105"
                       : ""
                   )}
-                  style={{ backgroundColor: color, border: "1px solid rgba(0,0,0,0.08)" }}
+                  style={{ backgroundColor: color, border: "1px solid rgba(0,0,0,0.15)" }}
                   title={color}
                   aria-label={color}
                 />
@@ -187,13 +187,13 @@ export default function DemoPage() {
                      key === "floral" ? t("floral") : t("traditional")}
                   </p>
                 )}
-                <div className="grid grid-cols-2 gap-1.5">
+                <div className="grid grid-cols-2 gap-2">
                   {patterns.map((pattern) => (
                     <button
                       key={pattern.id}
                       onClick={() => setPatternId(pattern.id === "none" ? null : pattern.id)}
                       className={cn(
-                        "px-2.5 py-2 text-xs border transition-all text-start",
+                        "px-3 py-2.5 text-xs border transition-all text-start min-h-[44px]",
                         (patternId === pattern.id || (patternId === null && pattern.id === "none"))
                           ? "border-espresso bg-cream-warm"
                           : "border-border hover:border-pink-salt-deep"

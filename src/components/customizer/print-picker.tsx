@@ -90,14 +90,14 @@ export default function PrintPicker() {
       )}
 
       {/* Category tabs — counts now show full SKU totals */}
-      <div className="flex gap-1 overflow-x-auto no-scrollbar -mx-1 px-1">
+      <div className="flex gap-1.5 overflow-x-auto no-scrollbar -mx-1 px-1 pb-1">
         {activeCategories.map((cat) => (
           <button
             key={cat}
             type="button"
             onClick={() => setActiveCat(cat)}
             className={cn(
-              "shrink-0 px-3 py-1.5 label-xs border transition-all",
+              "shrink-0 px-4 py-2 label-xs border transition-all min-h-[36px]",
               activeCat === cat
                 ? "border-espresso bg-espresso text-cream"
                 : "border-border text-foreground hover:border-espresso"
@@ -112,7 +112,7 @@ export default function PrintPicker() {
       </div>
 
       {/* Flat thumbnail grid — every swatch is its own button */}
-      <div className="grid grid-cols-3 gap-1.5 max-h-[420px] overflow-y-auto pe-1 no-scrollbar">
+      <div className="grid grid-cols-3 gap-2 max-h-[420px] overflow-y-auto pe-1 no-scrollbar">
         {swatchesInCat.map((swatch) => {
           const isSelected = swatch.sku === fabricPrintSku;
           return (
