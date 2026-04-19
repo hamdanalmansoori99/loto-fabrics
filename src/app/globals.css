@@ -7,9 +7,15 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Typography system */
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+  --font-arabic: var(--font-arabic);
+  --font-heading: var(--font-display); /* legacy alias */
+  --font-serif: var(--font-display); /* legacy alias */
+
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -39,6 +45,19 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  /* Brand palette — proportional system: 70% cream / 20% pink salt / 8% espresso / 2% bronze */
+  --color-cream: var(--cream);
+  --color-cream-warm: var(--cream-warm);
+  --color-pink-salt: var(--pink-salt);
+  --color-pink-salt-dark: var(--pink-salt-dark);
+  --color-pink-salt-deep: var(--pink-salt-deep);
+  --color-pink-salt-light: var(--pink-salt-light);
+  --color-espresso: var(--espresso);
+  --color-espresso-soft: var(--espresso-soft);
+  --color-bronze: var(--bronze);
+  --color-taupe: var(--taupe);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -49,72 +68,53 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  /* ─── Ground + structure ─── */
+  --background: #F6EFE9;
+  --foreground: #331E07;
+  --card: #FFFFFF;
+  --card-foreground: #331E07;
+  --popover: #FFFFFF;
+  --popover-foreground: #331E07;
+  --primary: #331E07;
+  --primary-foreground: #F6EFE9;
+  --secondary: #EDE2D6;
+  --secondary-foreground: #331E07;
+  --muted: #EDE2D6;
+  --muted-foreground: #9A8472;
+  --accent: #E8C4B8;
+  --accent-foreground: #331E07;
+  --destructive: #9A3B3B;
+  --border: #DFCFC3;
+  --input: #DFCFC3;
+  --ring: #B88777;
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* ─── Brand palette (named tokens) ─── */
+  --cream: #F6EFE9;          /* primary ground */
+  --cream-warm: #EDE2D6;     /* section alt */
+  --pink-salt: #E8C4B8;      /* signature pink */
+  --pink-salt-light: #F3DED7;
+  --pink-salt-dark: #D4A99B;
+  --pink-salt-deep: #B88777; /* emphasis */
+  --espresso: #331E07;       /* primary dark */
+  --espresso-soft: #5C4A38;  /* mid-tone */
+  --bronze: #8B6F4E;         /* single accent — limited/sale only */
+  --taupe: #9A8472;          /* muted foreground */
+
+  --chart-1: #E8C4B8;
+  --chart-2: #D4A99B;
+  --chart-3: #B88777;
+  --chart-4: #8B6F4E;
+  --chart-5: #331E07;
+
+  --radius: 0.375rem;
+  --sidebar: #F6EFE9;
+  --sidebar-foreground: #331E07;
+  --sidebar-primary: #331E07;
+  --sidebar-primary-foreground: #F6EFE9;
+  --sidebar-accent: #EDE2D6;
+  --sidebar-accent-foreground: #331E07;
+  --sidebar-border: #DFCFC3;
+  --sidebar-ring: #B88777;
 }
 
 @layer base {
@@ -123,8 +123,226 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv11";
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
   }
+  /* RTL always uses Cairo for body text; display serif is LTR-only */
+  html[dir="rtl"] body {
+    font-family: var(--font-arabic), system-ui, sans-serif;
+  }
+}
+
+/* ═══ Typography utilities (editorial hierarchy) ═══ */
+
+.display-xl {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  font-variation-settings: "SOFT" 0, "opsz" 144;
+}
+
+.display-lg {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  font-variation-settings: "SOFT" 0, "opsz" 96;
+}
+
+.display-md {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.018em;
+  font-variation-settings: "SOFT" 0, "opsz" 48;
+}
+
+.display-sm {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+}
+
+.display-italic {
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "opsz" 48;
+}
+
+.label-xs {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.label-sm {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem; /* 12px */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.price-num {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.body-lg {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+/* RTL overrides for display classes — use Cairo instead of Fraunces */
+html[dir="rtl"] .display-xl,
+html[dir="rtl"] .display-lg,
+html[dir="rtl"] .display-md,
+html[dir="rtl"] .display-sm {
+  font-family: var(--font-arabic), system-ui, sans-serif;
+  font-style: normal !important;
+}
+html[dir="rtl"] .label-xs,
+html[dir="rtl"] .label-sm {
+  font-family: var(--font-arabic), system-ui, sans-serif;
+  letter-spacing: 0.06em;
+}
+html[dir="rtl"] .price-num {
+  font-family: var(--font-arabic), var(--font-mono), ui-monospace, monospace;
+}
+
+/* ═══ Legacy utilities kept for compat ═══ */
+
+.accent-line {
+  height: 1px;
+  width: 3rem;
+  background: var(--pink-salt-dark);
+}
+
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.animate-fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══ Scroll-reveal mask (clip-path) ═══ */
+
+.reveal-mask {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: clip-path;
+}
+.reveal-mask.visible {
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .reveal-mask {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: inset(0 0 0 0) !important;
+    transition: none !important;
+  }
+}
+
+/* ═══ Word-stagger hero animation ═══ */
+
+.stagger-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stagger-word.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══ Infinite marquee ═══ */
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: inline-flex;
+  animation: marquee-scroll 40s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ═══ Utility: horizontal scroll snap for lookbook / galleries ═══ */
+
+.snap-row {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.snap-start-always {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Hide scrollbars on horizontal carousels */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ═══ Safe-area insets for sticky mobile bars ═══ */
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+.safe-top {
+  padding-top: env(safe-area-inset-top, 0);
+}
+
+/* ═══ Frosted backdrop (for sticky bars) ═══ */
+
+.frosted-dark {
+  background: color-mix(in srgb, var(--espresso) 88%, transparent);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+}
+
+.frosted-light {
+  background: color-mix(in srgb, var(--cream) 85%, transparent);
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+}
+
+/* ═══ Focus ring — crisp, not blue ═══ */
+
+*:focus-visible {
+  outline: 2px solid var(--pink-salt-deep);
+  outline-offset: 2px;
+  border-radius: 2px;
 }
