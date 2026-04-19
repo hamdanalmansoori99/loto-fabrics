@@ -111,8 +111,12 @@ export default function PrintPicker() {
         ))}
       </div>
 
-      {/* Flat thumbnail grid — every swatch is its own button */}
-      <div className="grid grid-cols-3 gap-2 max-h-[420px] overflow-y-auto pe-1 no-scrollbar">
+      {/* Flat thumbnail grid — every swatch is its own button.
+          Parent has no height constraint here; the ancestor <aside> handles
+          sidebar scrolling on desktop, page scroll handles mobile. Swatches
+          use padding-top trick for width-driven height — bypasses the
+          Safari aspect-ratio-on-grid-buttons collapse bug. */}
+      <div className="grid grid-cols-3 gap-2">
         {swatchesInCat.map((swatch) => {
           const isSelected = swatch.sku === fabricPrintSku;
           return (
@@ -121,11 +125,12 @@ export default function PrintPicker() {
               type="button"
               onClick={() => setFabricPrint(swatch.sku)}
               className={cn(
-                "relative aspect-[3/4] overflow-hidden border transition-colors",
+                "relative block w-full overflow-hidden border transition-colors",
                 isSelected
                   ? "border-espresso ring-2 ring-espresso"
                   : "border-border hover:border-pink-salt-deep"
               )}
+              style={{ paddingTop: "133.333%" }}
               aria-label={swatch.sku}
               title={swatch.sku}
             >
