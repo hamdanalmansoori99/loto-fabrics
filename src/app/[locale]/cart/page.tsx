@@ -6,13 +6,13 @@ import { useLocale, useTranslations } from "next-intl";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useCartStore } from "@/stores/cart-store";
+import { useCartStore, cartLineTotal } from "@/stores/cart-store";
 import { formatPrice, localize } from "@/lib/format";
 
 export default function CartPage() {
   const t = useTranslations();
   const locale = useLocale();
-  const { items, removeItem, updateMeters, getSubtotal, getVat, getTotal } =
+  const { items, removeItem, updateMeters, updateQuantity, getSubtotal, getVat, getTotal } =
     useCartStore();
 
   if (items.length === 0) {
@@ -65,32 +65,61 @@ export default function CartPage() {
                 >
                   {localize(item, "name", locale)}
                 </Link>
-                <p className="price-num text-xs text-muted-foreground mt-1">
-                  {formatPrice(item.pricePerMeter, locale)} / {t("common.per_meter")}
-                </p>
+                {item.priceMode === "per_meter" && item.pricePerMeter !== undefined && (
+                  <p className="price-num text-xs text-muted-foreground mt-1">
+                    {formatPrice(item.pricePerMeter, locale)} / {t("common.per_meter")}
+                  </p>
+                )}
+                {item.priceMode === "per_piece" && item.pricePerPiece !== undefined && (
+                  <p className="price-num text-xs text-muted-foreground mt-1">
+                    {formatPrice(item.pricePerPiece, locale)} / {t("products.per_piece")}
+                  </p>
+                )}
 
                 <div className="mt-auto flex items-end justify-between gap-3">
-                  <div className="flex items-center border border-border">
-                    <button
-                      onClick={() => updateMeters(item.productId, item.meters - 1, item.variantId)}
-                      className="w-10 h-10 flex items-center justify-center hover:bg-cream-warm transition-colors"
-                      aria-label="Decrease"
-                    >
-                      <Minus className="h-3.5 w-3.5" />
-                    </button>
-                    <span className="w-10 price-num text-sm text-center">{item.meters}m</span>
-                    <button
-                      onClick={() => updateMeters(item.productId, item.meters + 1, item.variantId)}
-                      className="w-10 h-10 flex items-center justify-center hover:bg-cream-warm transition-colors"
-                      aria-label="Increase"
-                    >
-                      <Plus className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
+                  {item.priceMode === "per_meter" && (
+                    <div className="flex items-center border border-border">
+                      <button
+                        onClick={() => updateMeters(item.productId, (item.meters ?? 1) - 1, item.variantId)}
+                        className="w-10 h-10 flex items-center justify-center hover:bg-cream-warm transition-colors"
+                        aria-label="Decrease"
+                      >
+                        <Minus className="h-3.5 w-3.5" />
+                      </button>
+                      <span className="w-10 price-num text-sm text-center">{item.meters}m</span>
+                      <button
+                        onClick={() => updateMeters(item.productId, (item.meters ?? 1) + 1, item.variantId)}
+                        className="w-10 h-10 flex items-center justify-center hover:bg-cream-warm transition-colors"
+                        aria-label="Increase"
+                      >
+                        <Plus className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  )}
+
+                  {item.priceMode === "per_piece" && (
+                    <div className="flex items-center border border-border">
+                      <button
+                        onClick={() => updateQuantity(item.productId, (item.quantity ?? 1) - 1, item.variantId)}
+                        className="w-10 h-10 flex items-center justify-center hover:bg-cream-warm transition-colors"
+                        aria-label="Decrease"
+                      >
+                        <Minus className="h-3.5 w-3.5" />
+                      </button>
+                      <span className="w-10 price-num text-sm text-center">{item.quantity}</span>
+                      <button
+                        onClick={() => updateQuantity(item.productId, (item.quantity ?? 1) + 1, item.variantId)}
+                        className="w-10 h-10 flex items-center justify-center hover:bg-cream-warm transition-colors"
+                        aria-label="Increase"
+                      >
+                        <Plus className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  )}
 
                   <div className="text-end">
                     <p className="price-num text-base text-espresso">
-                      {formatPrice(item.pricePerMeter * item.meters, locale)}
+                      {formatPrice(cartLineTotal(item), locale)}
                     </p>
                     <button
                       onClick={() => removeItem(item.productId, item.variantId)}

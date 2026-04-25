@@ -104,17 +104,43 @@ export default function ProductCard({ product, feature = false, priority = false
         </h3>
 
         <div className="mt-1 flex items-baseline gap-2">
-          <span className="price-num text-sm text-espresso">
-            {formatPrice(product.pricePerMeter, locale)}
-          </span>
-          {product.compareAtPrice && (
-            <span className="price-num text-xs text-muted-foreground line-through">
-              {formatPrice(product.compareAtPrice, locale)}
+          {product.priceMode === "per_meter" && product.pricePerMeter !== undefined && (
+            <>
+              <span className="price-num text-sm text-espresso">
+                {formatPrice(product.pricePerMeter, locale)}
+              </span>
+              {product.compareAtPrice && (
+                <span className="price-num text-xs text-muted-foreground line-through">
+                  {formatPrice(product.compareAtPrice, locale)}
+                </span>
+              )}
+              <span className="label-xs text-muted-foreground">
+                / {t("per_meter")}
+              </span>
+            </>
+          )}
+
+          {product.priceMode === "per_piece" && product.pricePerPiece !== undefined && (
+            <>
+              <span className="price-num text-sm text-espresso">
+                {formatPrice(product.pricePerPiece, locale)}
+              </span>
+              {product.compareAtPrice && (
+                <span className="price-num text-xs text-muted-foreground line-through">
+                  {formatPrice(product.compareAtPrice, locale)}
+                </span>
+              )}
+            </>
+          )}
+
+          {product.priceMode === "on_request" && (
+            <span
+              className="display-sm italic text-bronze text-sm"
+              style={{ fontVariationSettings: "'SOFT' 100, 'opsz' 24" }}
+            >
+              {t("inquire_on_whatsapp")}
             </span>
           )}
-          <span className="label-xs text-muted-foreground">
-            / {t("per_meter")}
-          </span>
         </div>
 
         <p className="mt-0.5 label-xs text-taupe">

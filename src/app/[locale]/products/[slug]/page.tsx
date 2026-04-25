@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useRef, useState } from "react";
-import { Heart, ShoppingBag, Palette, MessageSquareQuote, Minus, Plus } from "lucide-react";
+import { Heart, ShoppingBag, Palette, MessageSquareQuote, Minus, Plus, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { sampleProducts, getProductBySlug } from "@/lib/sample-data";
 import { formatPrice, localize } from "@/lib/format";
@@ -17,6 +17,7 @@ import ProductCard from "@/components/products/product-card";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { getCollection, getColorFamily } from "@/lib/collections";
+import { productInquiryWhatsappLink } from "@/lib/whatsapp";
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -29,7 +30,10 @@ export default function ProductDetailPage() {
   const slug = params.slug as string;
   const product = getProductBySlug(slug);
 
-  const [meters, setMeters] = useState(product?.minOrderMeters ?? 2);
+  // Hooks must be unconditional — call them with safe defaults when product is missing
+  const minMeters = product?.minOrderMeters ?? 2;
+  const [meters, setMeters] = useState(minMeters);
+  const [quantity, setQuantity] = useState(1);
   const inlineCtaRef = useRef<HTMLDivElement>(null);
 
   if (!product) return notFound();
@@ -43,21 +47,49 @@ export default function ProductDetailPage() {
     .filter((p): p is NonNullable<typeof p> => Boolean(p))
     .slice(0, 3);
 
-  const subtotal = product.pricePerMeter * meters;
-  const bulkEligible = meters >= 30;
+  const isPerMeter = product.priceMode === "per_meter";
+  const isPerPiece = product.priceMode === "per_piece";
+  const isOnRequest = product.priceMode === "on_request";
+
+  const subtotal = isPerMeter
+    ? (product.pricePerMeter ?? 0) * meters
+    : isPerPiece
+    ? (product.pricePerPiece ?? 0) * quantity
+    : 0;
+
+  const bulkEligible = isPerMeter && meters >= 30;
 
   function handleAdd() {
     const img = product!.images.find((i) => i.isMain) || product!.images[0];
-    addItem({
-      productId: product!.id,
-      nameEn: product!.nameEn,
-      nameAr: product!.nameAr,
-      slug: product!.slug,
-      image: img?.url || "",
-      pricePerMeter: product!.pricePerMeter,
-      meters,
-    });
+    if (isPerMeter) {
+      addItem({
+        productId: product!.id,
+        nameEn: product!.nameEn,
+        nameAr: product!.nameAr,
+        slug: product!.slug,
+        image: img?.url || "",
+        priceMode: "per_meter",
+        pricePerMeter: product!.pricePerMeter,
+        meters,
+      });
+    } else if (isPerPiece) {
+      addItem({
+        productId: product!.id,
+        nameEn: product!.nameEn,
+        nameAr: product!.nameAr,
+        slug: product!.slug,
+        image: img?.url || "",
+        priceMode: "per_piece",
+        pricePerPiece: product!.pricePerPiece,
+        quantity,
+      });
+    }
     toast.success(locale === "ar" ? "تمت الإضافة إلى الحقيبة" : "Added to bag");
+  }
+
+  function handleInquire() {
+    const link = productInquiryWhatsappLink(product!.nameEn, product!.slug);
+    window.open(link, "_blank");
   }
 
   return (
@@ -94,7 +126,6 @@ export default function ProductDetailPage() {
                   />
                 </div>
               ))}
-              {/* If only one image, render a cropped detail view for composition */}
               {product.images.length === 1 && (
                 <div className="relative aspect-[3/4] bg-cream-warm overflow-hidden">
                   <Image
@@ -133,10 +164,10 @@ export default function ProductDetailPage() {
             </div>
           </div>
 
-          {/* ─── Buy box (sticky on desktop) ─── */}
+          {/* ─── Buy box ─── */}
           <div className="lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto">
-            {/* Eyebrow line */}
-            <div className="flex items-center gap-2 mb-4 label-xs text-bronze">
+            {/* Eyebrow */}
+            <div className="flex items-center gap-2 mb-4 label-xs text-bronze flex-wrap">
               <span className="capitalize">{product.fabricType}</span>
               {collection && (
                 <>
@@ -159,26 +190,54 @@ export default function ProductDetailPage() {
               {localize(product, "name", locale)}
             </h1>
 
-            {/* Price */}
-            <div className="flex items-baseline gap-3 mb-5">
-              <span className="price-num text-2xl text-espresso">
-                {formatPrice(product.pricePerMeter, locale)}
-              </span>
-              {product.compareAtPrice && (
-                <span className="price-num text-base text-muted-foreground line-through">
-                  {formatPrice(product.compareAtPrice, locale)}
+            {/* Price block */}
+            {isPerMeter && product.pricePerMeter !== undefined && (
+              <div className="flex items-baseline gap-3 mb-5 flex-wrap">
+                <span className="price-num text-2xl text-espresso">
+                  {formatPrice(product.pricePerMeter, locale)}
                 </span>
-              )}
-              <span className="label-xs text-muted-foreground">
-                / {t("common.per_meter")}
-              </span>
-            </div>
+                {product.compareAtPrice && (
+                  <span className="price-num text-base text-muted-foreground line-through">
+                    {formatPrice(product.compareAtPrice, locale)}
+                  </span>
+                )}
+                <span className="label-xs text-muted-foreground">/ {t("common.per_meter")}</span>
+              </div>
+            )}
+
+            {isPerPiece && product.pricePerPiece !== undefined && (
+              <div className="flex items-baseline gap-3 mb-5 flex-wrap">
+                <span className="price-num text-2xl text-espresso">
+                  {formatPrice(product.pricePerPiece, locale)}
+                </span>
+                {product.compareAtPrice && (
+                  <span className="price-num text-base text-muted-foreground line-through">
+                    {formatPrice(product.compareAtPrice, locale)}
+                  </span>
+                )}
+                <span className="label-xs text-muted-foreground">/ {t("products.per_piece")}</span>
+              </div>
+            )}
+
+            {isOnRequest && (
+              <div className="mb-5">
+                <p
+                  className="display-md italic text-bronze"
+                  style={{ fontVariationSettings: "'SOFT' 100, 'opsz' 32" }}
+                >
+                  {t("products.price_on_request")}
+                </p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {t("products.inquire_subtitle")}
+                </p>
+              </div>
+            )}
 
             <p className="text-sm text-foreground/80 leading-relaxed mb-6">
               {localize(product, "description", locale)}
             </p>
 
-            {/* Fabric specs table */}
+            {/* Fabric specs */}
             <div className="border-t border-border/50 py-4 grid grid-cols-2 gap-x-6 gap-y-3 text-sm mb-2">
               {product.composition && (
                 <div>
@@ -218,54 +277,103 @@ export default function ProductDetailPage() {
               )}
             </div>
 
-            {/* Meter calculator */}
-            <MeterCalculator onSelect={(m) => setMeters(Math.max(product.minOrderMeters, m))} />
+            {/* Meter calculator — per_meter only */}
+            {isPerMeter && (
+              <MeterCalculator onSelect={(m) => setMeters(Math.max(minMeters, m))} />
+            )}
 
-            {/* Quantity */}
-            <div className="border-t border-border/50 py-5">
-              <div className="flex items-center justify-between mb-3">
-                <p className="label-xs text-bronze">{t("common.quantity")}</p>
-                <p className="label-xs text-muted-foreground">
-                  {t("common.min_order")}: {product.minOrderMeters}m
-                </p>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center border border-border">
-                  <button
-                    type="button"
-                    onClick={() => setMeters((m) => Math.max(product.minOrderMeters, m - 1))}
-                    className="w-11 h-11 flex items-center justify-center hover:bg-cream-warm transition-colors"
-                    aria-label="Decrease"
-                  >
-                    <Minus className="h-4 w-4" />
-                  </button>
-                  <div className="w-14 text-center price-num text-base">{meters}m</div>
-                  <button
-                    type="button"
-                    onClick={() => setMeters((m) => m + 1)}
-                    className="w-11 h-11 flex items-center justify-center hover:bg-cream-warm transition-colors"
-                    aria-label="Increase"
-                  >
-                    <Plus className="h-4 w-4" />
-                  </button>
+            {/* Quantity stepper */}
+            {isPerMeter && (
+              <div className="border-t border-border/50 py-5">
+                <div className="flex items-center justify-between mb-3">
+                  <p className="label-xs text-bronze">{t("common.quantity")}</p>
+                  <p className="label-xs text-muted-foreground">
+                    {t("common.min_order")}: {minMeters}m
+                  </p>
                 </div>
-                <div>
-                  <p className="label-xs text-muted-foreground">{t("common.subtotal")}</p>
-                  <p className="price-num text-lg text-espresso">{formatPrice(subtotal, locale)}</p>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center border border-border">
+                    <button
+                      type="button"
+                      onClick={() => setMeters((m) => Math.max(minMeters, m - 1))}
+                      className="w-11 h-11 flex items-center justify-center hover:bg-cream-warm transition-colors"
+                      aria-label="Decrease"
+                    >
+                      <Minus className="h-4 w-4" />
+                    </button>
+                    <div className="w-14 text-center price-num text-base">{meters}m</div>
+                    <button
+                      type="button"
+                      onClick={() => setMeters((m) => m + 1)}
+                      className="w-11 h-11 flex items-center justify-center hover:bg-cream-warm transition-colors"
+                      aria-label="Increase"
+                    >
+                      <Plus className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <div>
+                    <p className="label-xs text-muted-foreground">{t("common.subtotal")}</p>
+                    <p className="price-num text-lg text-espresso">{formatPrice(subtotal, locale)}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
+
+            {isPerPiece && (
+              <div className="border-t border-border/50 py-5">
+                <div className="flex items-center justify-between mb-3">
+                  <p className="label-xs text-bronze">{t("common.quantity")}</p>
+                  <p className="label-xs text-muted-foreground">{t("products.one_of_one")}</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center border border-border">
+                    <button
+                      type="button"
+                      onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                      className="w-11 h-11 flex items-center justify-center hover:bg-cream-warm transition-colors"
+                      aria-label="Decrease"
+                    >
+                      <Minus className="h-4 w-4" />
+                    </button>
+                    <div className="w-14 text-center price-num text-base">{quantity}</div>
+                    <button
+                      type="button"
+                      onClick={() => setQuantity((q) => q + 1)}
+                      className="w-11 h-11 flex items-center justify-center hover:bg-cream-warm transition-colors"
+                      aria-label="Increase"
+                    >
+                      <Plus className="h-4 w-4" />
+                    </button>
+                  </div>
+                  <div>
+                    <p className="label-xs text-muted-foreground">{t("common.subtotal")}</p>
+                    <p className="price-num text-lg text-espresso">{formatPrice(subtotal, locale)}</p>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* CTAs */}
             <div ref={inlineCtaRef} className="flex gap-3 mb-3">
-              <Button
-                size="lg"
-                className="flex-1 bg-espresso hover:bg-espresso-soft text-cream label-sm py-6 h-auto"
-                onClick={handleAdd}
-              >
-                <ShoppingBag className="h-4 w-4 me-2" />
-                {t("common.add_to_cart")}
-              </Button>
+              {isOnRequest ? (
+                <Button
+                  size="lg"
+                  className="flex-1 bg-espresso hover:bg-espresso-soft text-cream label-sm py-6 h-auto"
+                  onClick={handleInquire}
+                >
+                  <MessageCircle className="h-4 w-4 me-2" />
+                  {t("products.inquire_button")}
+                </Button>
+              ) : (
+                <Button
+                  size="lg"
+                  className="flex-1 bg-espresso hover:bg-espresso-soft text-cream label-sm py-6 h-auto"
+                  onClick={handleAdd}
+                >
+                  <ShoppingBag className="h-4 w-4 me-2" />
+                  {t("common.add_to_cart")}
+                </Button>
+              )}
               <Button
                 type="button"
                 onClick={() => toggleSaved(product.id)}
@@ -293,7 +401,7 @@ export default function ProductDetailPage() {
               </Button>
             )}
 
-            {/* Bulk quote CTA — only at 30m+ */}
+            {/* Bulk quote — per_meter only, at 30m+ */}
             {bulkEligible && (
               <div className="mt-4 p-4 bg-cream-warm border-l-2 border-bronze">
                 <p className="label-xs text-bronze mb-1">{t("products.bulk_quote")}</p>
@@ -308,10 +416,12 @@ export default function ProductDetailPage() {
               </div>
             )}
 
-            {/* Tabby promo */}
-            <p className="mt-4 label-xs text-muted-foreground text-center">
-              {t("cart.tabby_promo")}
-            </p>
+            {/* Tabby promo — only for products with a price */}
+            {!isOnRequest && (
+              <p className="mt-4 label-xs text-muted-foreground text-center">
+                {t("cart.tabby_promo")}
+              </p>
+            )}
           </div>
         </div>
 
@@ -333,13 +443,39 @@ export default function ProductDetailPage() {
         )}
       </div>
 
-      {/* Mobile sticky add-to-bag */}
-      <MobileAddToBag
-        meters={meters}
-        pricePerMeter={product.pricePerMeter}
-        onAdd={handleAdd}
-        triggerRef={inlineCtaRef}
-      />
+      {/* Mobile sticky CTA — per_meter or per_piece only */}
+      {isPerMeter && product.pricePerMeter !== undefined && (
+        <MobileAddToBag
+          meters={meters}
+          pricePerMeter={product.pricePerMeter}
+          onAdd={handleAdd}
+          triggerRef={inlineCtaRef}
+        />
+      )}
+      {isPerPiece && product.pricePerPiece !== undefined && (
+        <MobileAddToBag
+          meters={quantity}
+          pricePerMeter={product.pricePerPiece}
+          onAdd={handleAdd}
+          triggerRef={inlineCtaRef}
+          unitLabel={t("products.per_piece")}
+        />
+      )}
+      {isOnRequest && (
+        <div className="lg:hidden fixed inset-x-0 bottom-0 z-40 frosted-dark text-cream safe-bottom">
+          <div className="flex items-center gap-3 px-4 py-3">
+            <p className="flex-1 label-xs text-cream/80">{t("products.price_on_request")}</p>
+            <button
+              type="button"
+              onClick={handleInquire}
+              className="inline-flex items-center gap-2 bg-cream text-espresso px-5 py-3 label-sm hover:bg-pink-salt transition-colors"
+            >
+              <MessageCircle className="h-4 w-4" />
+              {t("products.inquire_button")}
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }

@@ -20,8 +20,15 @@ export default function ProductsPage() {
 
   const initialCollection = (searchParams.get("collection") as Collection | null) || null;
 
+  // Effective price for filter/sort regardless of priceMode
+  const effectivePrice = (p: typeof sampleProducts[number]): number => {
+    if (p.priceMode === "per_meter") return p.pricePerMeter ?? 0;
+    if (p.priceMode === "per_piece") return p.pricePerPiece ?? 0;
+    return 0; // on_request — treat as 0 so the price filter never excludes
+  };
+
   const maxPriceCap = useMemo(
-    () => Math.ceil(Math.max(...sampleProducts.map((p) => p.pricePerMeter)) / 100) * 100,
+    () => Math.ceil(Math.max(...sampleProducts.map(effectivePrice)) / 100) * 100,
     []
   );
 
@@ -44,7 +51,8 @@ export default function ProductsPage() {
       if (filters.collection && p.collection !== filters.collection) return false;
       if (filters.fabric && p.fabricType !== filters.fabric) return false;
       if (filters.colorFamily && p.colorFamily !== filters.colorFamily) return false;
-      if (p.pricePerMeter > filters.maxPrice) return false;
+      // on_request products skip price filter; per_meter/per_piece use effectivePrice
+      if (p.priceMode !== "on_request" && effectivePrice(p) > filters.maxPrice) return false;
       return true;
     });
 
@@ -53,10 +61,10 @@ export default function ProductsPage() {
         list = [...list].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
         break;
       case "price-asc":
-        list = [...list].sort((a, b) => a.pricePerMeter - b.pricePerMeter);
+        list = [...list].sort((a, b) => effectivePrice(a) - effectivePrice(b));
         break;
       case "price-desc":
-        list = [...list].sort((a, b) => b.pricePerMeter - a.pricePerMeter);
+        list = [...list].sort((a, b) => effectivePrice(b) - effectivePrice(a));
         break;
       case "limited":
         list = [...list].sort((a, b) => Number(!!b.isLimited) - Number(!!a.isLimited));

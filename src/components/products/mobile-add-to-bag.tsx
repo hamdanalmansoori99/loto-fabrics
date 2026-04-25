@@ -7,22 +7,30 @@ import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 interface MobileAddToBagProps {
+  /** Quantity (meters for fabric, pieces for garments) */
   meters: number;
+  /** Unit price (per meter or per piece) */
   pricePerMeter: number;
   onAdd: () => void;
   /** Ref to the inline CTA element — sticky bar shows when this goes out of view */
   triggerRef: React.RefObject<HTMLElement | null>;
+  /** Override the unit label (defaults to t("common.per_meter")) — used for per-piece products */
+  unitLabel?: string;
 }
 
 /**
  * Mobile-only sticky add-to-bag bar. Appears (slide-up) once the inline
  * add-to-cart button scrolls out of view. Hidden on lg+.
+ *
+ * For per-piece products, pass `meters` as the piece count and `unitLabel`
+ * as the per-piece string (e.g. "per piece").
  */
 export function MobileAddToBag({
   meters,
   pricePerMeter,
   onAdd,
   triggerRef,
+  unitLabel,
 }: MobileAddToBagProps) {
   const t = useTranslations();
   const locale = useLocale();
@@ -41,6 +49,10 @@ export function MobileAddToBag({
   }, [triggerRef]);
 
   const subtotal = meters * pricePerMeter;
+  const isPerPiece = !!unitLabel;
+  const unitLine = isPerPiece
+    ? `${meters} × ${formatPrice(pricePerMeter, locale)} / ${unitLabel}`
+    : `${meters}m · ${formatPrice(pricePerMeter, locale)} / ${t("common.per_meter")}`;
 
   return (
     <div
@@ -53,7 +65,7 @@ export function MobileAddToBag({
     >
       <div className="flex items-center gap-3 px-4 py-3">
         <div className="flex-1 min-w-0">
-          <p className="label-xs text-cream/70">{meters}m · {formatPrice(pricePerMeter, locale)} / {t("common.per_meter")}</p>
+          <p className="label-xs text-cream/70 truncate">{unitLine}</p>
           <p className="price-num text-base text-cream font-medium">{formatPrice(subtotal, locale)}</p>
         </div>
         <button

@@ -16,6 +16,7 @@ import {
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import PrintPicker from "@/components/customizer/print-picker";
+import { designStudioWhatsappLink } from "@/lib/whatsapp";
 
 const FabricCanvas = dynamic(
   () => import("@/components/customizer/fabric-canvas"),
@@ -52,6 +53,7 @@ export default function DemoPage() {
     patternScale,
     patternRotation,
     zoom,
+    fabricPrintSku,
     savedDesigns,
     setFabricType,
     setBaseColor,
@@ -295,9 +297,23 @@ export default function DemoPage() {
               <Download className="h-4 w-4 me-2" />
               {t("download")}
             </Button>
-            <Button className="bg-espresso hover:bg-espresso-soft text-cream label-sm py-6 h-auto">
+            <Button
+              onClick={() => {
+                const url = designStudioWhatsappLink({
+                  fabricType,
+                  baseColor,
+                  patternId,
+                  patternScale,
+                  patternRotation,
+                  fabricPrintSku,
+                  locale,
+                });
+                window.open(url, "_blank");
+              }}
+              className="bg-espresso hover:bg-espresso-soft text-cream label-sm py-6 h-auto"
+            >
               <Send className="h-4 w-4 me-2" />
-              {t("request_quote")}
+              {t("contact_whatsapp_request")}
             </Button>
           </section>
 

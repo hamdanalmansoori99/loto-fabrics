@@ -23,7 +23,7 @@ export default async function Footer() {
               {t("description")}
             </p>
             <p className="mt-6 label-xs text-cream/50">
-              {t("made_in")} · {locale === "ar" ? "القوز · دبي" : "Al Quoz · Dubai"}
+              {t("made_in")} · {locale === "ar" ? "أبوظبي" : "Abu Dhabi"}
             </p>
           </div>
 

@@ -2,10 +2,10 @@
 
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { MapPin, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { WHATSAPP_NUMBER_DISPLAY, WHATSAPP_LINK } from "@/lib/contact";
 
 export default function ContactPage() {
   const t = useTranslations("contact");
@@ -64,18 +64,18 @@ export default function ContactPage() {
 
           <div>
             <p className="label-xs text-bronze mb-2">{t("phone_label")}</p>
-            <p className="text-foreground">+971 50 123 4567</p>
-          </div>
-
-          <div>
-            <p className="label-xs text-bronze mb-2">{t("email_label")}</p>
-            <p className="text-foreground">hello@lotofabrics.ae</p>
+            <p className="text-foreground">{WHATSAPP_NUMBER_DISPLAY}</p>
           </div>
 
           <div className="pt-8 border-t border-border/50">
             <p className="label-xs text-bronze mb-2">WhatsApp</p>
-            <a href="https://wa.me/971501234567" className="text-foreground border-b border-pink-salt-deep pb-0.5 hover:border-espresso transition-colors">
-              +971 50 123 4567
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground border-b border-pink-salt-deep pb-0.5 hover:border-espresso transition-colors"
+            >
+              {WHATSAPP_NUMBER_DISPLAY}
             </a>
           </div>
         </div>

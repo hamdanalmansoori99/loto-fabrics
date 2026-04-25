@@ -148,20 +148,26 @@ export default function CheckoutPage() {
             </h2>
             <Separator />
             <div className="space-y-3">
-              {items.map((item) => (
-                <div
-                  key={`${item.productId}-${item.variantId}`}
-                  className="flex justify-between text-sm"
-                >
-                  <span className="truncate me-4">
-                    {locale === "ar" ? item.nameAr : item.nameEn} x{" "}
-                    {item.meters}m
-                  </span>
-                  <span className="shrink-0">
-                    {formatPrice(item.pricePerMeter * item.meters, locale)}
-                  </span>
-                </div>
-              ))}
+              {items.map((item) => {
+                const isMeter = item.priceMode === "per_meter";
+                const qtyLabel = isMeter ? `${item.meters}m` : `× ${item.quantity ?? 1}`;
+                const lineTotal = isMeter
+                  ? (item.pricePerMeter ?? 0) * (item.meters ?? 0)
+                  : (item.pricePerPiece ?? 0) * (item.quantity ?? 0);
+                return (
+                  <div
+                    key={`${item.productId}-${item.variantId}`}
+                    className="flex justify-between text-sm"
+                  >
+                    <span className="truncate me-4">
+                      {locale === "ar" ? item.nameAr : item.nameEn} {qtyLabel}
+                    </span>
+                    <span className="shrink-0">
+                      {formatPrice(lineTotal, locale)}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
             <Separator />
             <div className="space-y-2 text-sm">

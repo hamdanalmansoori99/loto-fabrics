@@ -33,7 +33,8 @@
     "reset": "Reset",
     "clear_all": "Clear all",
     "filters": "Filters",
-    "sort": "Sort"
+    "sort": "Sort",
+    "inquire_on_whatsapp": "Inquire on WhatsApp"
   },
   "home": {
     "hero_eyebrow": "Loto Fabrics · United Arab Emirates",
@@ -141,7 +142,12 @@
     "empty_sub": "Try another collection.",
     "new": "New",
     "limited": "Limited",
-    "sale": "Sale"
+    "sale": "Sale",
+    "per_piece": "per piece",
+    "price_on_request": "Inquire on WhatsApp",
+    "inquire_subtitle": "Reach out and our atelier will share availability and pricing.",
+    "inquire_button": "Inquire on WhatsApp",
+    "one_of_one": "1 of 1 — single piece"
   },
   "customizer": {
     "title": "Design Studio",
@@ -163,6 +169,7 @@
     "view_kaftan": "View on kaftan",
     "view_swatch": "View as swatch",
     "request_quote": "Send to atelier",
+    "contact_whatsapp_request": "Contact us on WhatsApp",
     "download": "Download preview",
     "zoom_in": "Zoom in",
     "zoom_out": "Zoom out",
@@ -247,7 +254,7 @@
     "phone_label": "Phone",
     "email_label": "Email",
     "location_label": "Atelier",
-    "location": "Al Quoz · Dubai · UAE",
+    "location": "Abu Dhabi · UAE",
     "trade_title": "Trade enquiries",
     "trade_text": "Wholesale, re-seller, and trade clients — please note the nature of your business in your message."
   },

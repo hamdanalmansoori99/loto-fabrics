@@ -1,5 +1,27 @@
-export type Collection = "bridal" | "occasion" | "everyday" | "essentials";
-export type ColorFamily = "cream" | "pink" | "gold" | "burgundy" | "blue" | "neutral";
+export type Collection =
+  | "bridal"
+  | "occasion"
+  | "everyday"
+  | "essentials"
+  | "mikhwar"
+  | "jalabya";
+
+export type ColorFamily =
+  | "cream"
+  | "pink"
+  | "gold"
+  | "burgundy"
+  | "blue"
+  | "neutral"
+  | "green"
+  | "red"
+  | "black";
+
+// How a product is sold:
+// - per_meter:  fabric, X AED/m, requires meters slider
+// - per_piece:  finished garment, fixed AED, single-quantity stepper
+// - on_request: no price displayed; user must inquire on WhatsApp
+export type PriceMode = "per_meter" | "per_piece" | "on_request";
 
 export interface Product {
   id: string;
@@ -8,9 +30,14 @@ export interface Product {
   slug: string;
   descriptionEn: string;
   descriptionAr: string;
-  pricePerMeter: number;
-  compareAtPrice?: number;
-  minOrderMeters: number;
+
+  // Pricing — exactly one model per product
+  priceMode: PriceMode;
+  pricePerMeter?: number;   // required when priceMode === "per_meter"
+  pricePerPiece?: number;   // required when priceMode === "per_piece"
+  compareAtPrice?: number;  // optional struck-through "was" price; works for any priceMode
+  minOrderMeters?: number;  // only meaningful for "per_meter"
+
   sku: string;
   fabricType: string;
   fabricWeight?: string;
