@@ -4,9 +4,9 @@ export const COLLECTIONS: { id: Collection; nameEn: string; nameAr: string; desc
   {
     id: "mikhwar",
     nameEn: "Mikhwars",
-    nameAr: "مكاوير",
-    descriptionEn: "Finished mikhwars, hand-embroidered for occasion wear.",
-    descriptionAr: "مكاوير جاهزة، مطرزة يدوياً للمناسبات.",
+    nameAr: "مخاوير",
+    descriptionEn: "Hand-embroidered occasion mikhwars, made for the days that matter.",
+    descriptionAr: "مخاوير مطرزة يدوياً للمناسبات المهمة.",
   },
   {
     id: "jalabya",
@@ -14,34 +14,6 @@ export const COLLECTIONS: { id: Collection; nameEn: string; nameAr: string; desc
     nameAr: "جلابيات",
     descriptionEn: "Everyday flowing jalabiyas. Inquire on WhatsApp.",
     descriptionAr: "جلابيات يومية انسيابية. استفسر عبر واتساب.",
-  },
-  {
-    id: "bridal",
-    nameEn: "Bridal",
-    nameAr: "العرائس",
-    descriptionEn: "Heirloom fabrics for the most storied day.",
-    descriptionAr: "أقمشة موروثة لأهم يوم في حياتك.",
-  },
-  {
-    id: "occasion",
-    nameEn: "Eid & Occasion",
-    nameAr: "العيد والمناسبات",
-    descriptionEn: "Statement cloth for celebrations that matter.",
-    descriptionAr: "أقمشة مميزة لاحتفالاتك المهمة.",
-  },
-  {
-    id: "everyday",
-    nameEn: "Everyday Luxe",
-    nameAr: "الفخامة اليومية",
-    descriptionEn: "Refined fabrics for considered daily wear.",
-    descriptionAr: "أقمشة راقية للارتداء اليومي المدروس.",
-  },
-  {
-    id: "essentials",
-    nameEn: "Essentials",
-    nameAr: "الأساسيات",
-    descriptionEn: "Solid-dyed foundations for bespoke creation.",
-    descriptionAr: "أساسيات مصبوغة سادة للتصميم حسب الطلب.",
   },
 ];
 

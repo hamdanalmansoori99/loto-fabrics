@@ -16,7 +16,7 @@ export default async function CollectionTiles() {
   // Grab one hero image per collection
   const firstFor = (id: string) =>
     sampleProducts.find((p) => p.collection === id)?.images[0]?.url ||
-    "/images/products/kaftan-peach-blossom.png";
+    "/images/products/garments/mikhwars/mikhwar-15.png";
 
   return (
     <section className="w-full py-24 sm:py-32 bg-cream-warm">

@@ -4,8 +4,8 @@ export const DEFAULT_MIN_ORDER_METERS = 1;
 export const COD_SURCHARGE = 15;
 
 export const EMIRATES = [
-  "Dubai",
   "Abu Dhabi",
+  "Dubai",
   "Sharjah",
   "Ajman",
   "Umm Al Quwain",
@@ -24,6 +24,5 @@ export const FABRIC_TYPES = [
   "satin",
 ] as const;
 
-export const WHATSAPP_NUMBER = "+971000000000"; // Update with actual number
-
-export const INSTAGRAM_URL = "https://www.instagram.com/loto_ae";
+// Phone, WhatsApp link, and location now live in src/lib/contact.ts
+// Instagram URL also exported from there. This file kept for VAT / currency / EMIRATES only.

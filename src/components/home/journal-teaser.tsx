@@ -15,7 +15,7 @@ export default async function JournalTeaser() {
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-16 items-center">
           <div className="relative aspect-[4/5] sm:aspect-[3/2] lg:aspect-[4/5]">
             <Image
-              src="/images/products/kaftan-pearl-gold.png"
+              src="/images/products/garments/mikhwars/mikhwar-04.png"
               alt=""
               fill
               sizes="(max-width: 1024px) 100vw, 55vw"

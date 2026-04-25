@@ -20,7 +20,7 @@ export default function AboutPage() {
       <FadeSection className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-20 items-start mb-24 sm:mb-32">
         <div className="relative aspect-[4/5] overflow-hidden bg-cream-warm">
           <Image
-            src="/images/products/kaftan-pearl-gold.png"
+            src="/images/products/garments/mikhwars/mikhwar-15.png"
             alt="Our craftsmanship"
             fill
             className="object-cover"

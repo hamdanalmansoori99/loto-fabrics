@@ -134,10 +134,7 @@ export default function ProductCard({ product, feature = false, priority = false
           )}
 
           {product.priceMode === "on_request" && (
-            <span
-              className="display-sm italic text-bronze text-sm"
-              style={{ fontVariationSettings: "'SOFT' 100, 'opsz' 24" }}
-            >
+            <span className="italic text-bronze text-xs sm:text-[13px] font-[var(--font-display)]">
               {t("inquire_on_whatsapp")}
             </span>
           )}

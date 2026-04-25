@@ -44,9 +44,7 @@ export default function PrintPicker() {
 
   const {
     fabricPrintSku,
-    fabricPrintScale,
     setFabricPrint,
-    setFabricPrintScale,
     clearFabricPrint,
   } = useCustomizerStore();
 
@@ -156,26 +154,6 @@ export default function PrintPicker() {
         )}
       </div>
 
-      {/* Scale slider */}
-      {fabricPrintSku && (
-        <div className="pt-2">
-          <label className="flex items-baseline justify-between label-xs text-muted-foreground mb-2">
-            <span>{t("print_scale")}</span>
-            <span className="price-num text-foreground">
-              {fabricPrintScale.toFixed(2)}×
-            </span>
-          </label>
-          <input
-            type="range"
-            min={0.5}
-            max={2}
-            step={0.05}
-            value={fabricPrintScale}
-            onChange={(e) => setFabricPrintScale(parseFloat(e.target.value))}
-            className="w-full accent-espresso"
-          />
-        </div>
-      )}
     </div>
   );
 }

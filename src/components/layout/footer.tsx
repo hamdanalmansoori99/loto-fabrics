@@ -1,5 +1,11 @@
 import Link from "next/link";
 import { getLocale, getTranslations } from "next-intl/server";
+import {
+  WHATSAPP_NUMBER_DISPLAY,
+  WHATSAPP_LINK,
+  INSTAGRAM_HANDLE,
+  INSTAGRAM_URL,
+} from "@/lib/contact";
 
 export default async function Footer() {
   const t = await getTranslations("footer");
@@ -10,7 +16,7 @@ export default async function Footer() {
     <footer className="w-full bg-espresso text-cream">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-10 md:px-16 lg:px-20 py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-[1.3fr_1fr_1fr] gap-10 sm:gap-14">
-          {/* Brand + newsletter lite */}
+          {/* Brand + location + contact */}
           <div>
             <Link
               href={`/${locale}`}
@@ -22,9 +28,27 @@ export default async function Footer() {
             <p className="text-sm text-cream/70 leading-relaxed max-w-[360px]">
               {t("description")}
             </p>
-            <p className="mt-6 label-xs text-cream/50">
-              {t("made_in")} · {locale === "ar" ? "أبوظبي" : "Abu Dhabi"}
-            </p>
+
+            {/* Location + WhatsApp + Instagram — visible at the bottom of every page */}
+            <div className="mt-6 space-y-2">
+              <p className="label-xs text-cream/50">{t("made_in")}</p>
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block label-xs text-cream/80 hover:text-cream transition-colors"
+              >
+                {tCommon("whatsapp")}: {WHATSAPP_NUMBER_DISPLAY}
+              </a>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block label-xs text-cream/80 hover:text-cream transition-colors"
+              >
+                {INSTAGRAM_HANDLE}
+              </a>
+            </div>
           </div>
 
           {/* Shop */}
@@ -37,18 +61,13 @@ export default async function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/products?collection=bridal`} className="text-sm text-cream/80 hover:text-cream transition-colors">
-                  {locale === "ar" ? "العرائس" : "Bridal"}
+                <Link href={`/${locale}/products?collection=mikhwar`} className="text-sm text-cream/80 hover:text-cream transition-colors">
+                  {locale === "ar" ? "مخاوير" : "Mikhwars"}
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/products?collection=occasion`} className="text-sm text-cream/80 hover:text-cream transition-colors">
-                  {locale === "ar" ? "العيد والمناسبات" : "Eid & Occasion"}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/products?collection=essentials`} className="text-sm text-cream/80 hover:text-cream transition-colors">
-                  {locale === "ar" ? "الأساسيات" : "Essentials"}
+                <Link href={`/${locale}/products?collection=jalabya`} className="text-sm text-cream/80 hover:text-cream transition-colors">
+                  {locale === "ar" ? "جلابيات" : "Jalabiyas"}
                 </Link>
               </li>
               <li>
@@ -74,9 +93,14 @@ export default async function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href={`/${locale}/contact?type=wholesale`} className="text-sm text-cream/80 hover:text-cream transition-colors">
-                  {t("trade")}
-                </Link>
+                <a
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-cream/80 hover:text-cream transition-colors"
+                >
+                  {tCommon("whatsapp")}
+                </a>
               </li>
               <li>
                 <a href="#shipping" className="text-sm text-cream/80 hover:text-cream transition-colors">
@@ -98,8 +122,8 @@ export default async function Footer() {
             {t("copyright", { year: 2026 })}
           </p>
           <div className="flex items-center gap-6">
-            <a href="https://instagram.com/loto_ae" className="label-xs text-cream/70 hover:text-cream transition-colors">
-              @LOTO_AE
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="label-xs text-cream/70 hover:text-cream transition-colors">
+              {INSTAGRAM_HANDLE}
             </a>
             <a href="#privacy" className="label-xs text-cream/70 hover:text-cream transition-colors">
               {t("privacy_policy")}

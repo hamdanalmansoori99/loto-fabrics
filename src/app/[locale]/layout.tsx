@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Loto Fabrics",
-    images: [{ url: "/images/products/kaftan-burgundy-rose.png", width: 1200, height: 1600 }],
+    images: [{ url: "/images/products/garments/mikhwars/mikhwar-15.png", width: 1200, height: 1600 }],
   },
   twitter: { card: "summary_large_image" },
   themeColor: "#F6EFE9",

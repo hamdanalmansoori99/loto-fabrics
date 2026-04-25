@@ -13,10 +13,10 @@ function InstagramIcon({ className }: { className?: string }) {
 }
 
 const TILES = [
-  "/images/products/kaftan-champagne-royal.png",
-  "/images/products/kaftan-peach-blossom.png",
-  "/images/products/kaftan-blush-pink-crystal.png",
-  "/images/products/kaftan-pearl-gold.png",
+  "/images/products/garments/mikhwars/mikhwar-08.png",
+  "/images/products/garments/jalabyas/jalabya-04.png",
+  "/images/products/garments/mikhwars/mikhwar-22.png",
+  "/images/products/garments/jalabyas/jalabya-08.png",
 ];
 
 export default async function InstagramGrid() {

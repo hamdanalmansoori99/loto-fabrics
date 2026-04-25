@@ -1,10 +1,4 @@
-export type Collection =
-  | "bridal"
-  | "occasion"
-  | "everyday"
-  | "essentials"
-  | "mikhwar"
-  | "jalabya";
+export type Collection = "mikhwar" | "jalabya";
 
 export type ColorFamily =
   | "cream"

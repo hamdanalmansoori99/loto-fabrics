@@ -5,7 +5,15 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { WHATSAPP_NUMBER_DISPLAY, WHATSAPP_LINK } from "@/lib/contact";
+import {
+  WHATSAPP_NUMBER_DISPLAY,
+  WHATSAPP_LINK,
+  INSTAGRAM_HANDLE,
+  INSTAGRAM_URL,
+} from "@/lib/contact";
+
+// Placeholder email — update when the company has a real address.
+const PLACEHOLDER_EMAIL = "hello@lotofabrics.ae";
 
 export default function ContactPage() {
   const t = useTranslations("contact");
@@ -64,7 +72,24 @@ export default function ContactPage() {
 
           <div>
             <p className="label-xs text-bronze mb-2">{t("phone_label")}</p>
-            <p className="text-foreground">{WHATSAPP_NUMBER_DISPLAY}</p>
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground hover:text-espresso-soft transition-colors"
+            >
+              {WHATSAPP_NUMBER_DISPLAY}
+            </a>
+          </div>
+
+          <div>
+            <p className="label-xs text-bronze mb-2">{t("email_label")}</p>
+            <a
+              href={`mailto:${PLACEHOLDER_EMAIL}`}
+              className="text-foreground hover:text-espresso-soft transition-colors"
+            >
+              {PLACEHOLDER_EMAIL}
+            </a>
           </div>
 
           <div className="pt-8 border-t border-border/50">
@@ -73,9 +98,21 @@ export default function ContactPage() {
               href={WHATSAPP_LINK}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground border-b border-pink-salt-deep pb-0.5 hover:border-espresso transition-colors"
+              className="block text-foreground border-b border-pink-salt-deep pb-0.5 hover:border-espresso transition-colors w-fit"
             >
               {WHATSAPP_NUMBER_DISPLAY}
+            </a>
+          </div>
+
+          <div>
+            <p className="label-xs text-bronze mb-2">Instagram</p>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground hover:text-espresso-soft transition-colors"
+            >
+              {INSTAGRAM_HANDLE}
             </a>
           </div>
         </div>

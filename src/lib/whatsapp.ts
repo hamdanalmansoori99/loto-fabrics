@@ -3,38 +3,21 @@ import { getColourway } from "./print-catalog";
 
 interface DesignParams {
   fabricType: string;
-  baseColor: string;
-  patternId: string | null;
-  patternScale: number;
-  patternRotation: number;
+  baseColor: string;          // unused in current message but kept for type compat
+  patternId: string | null;   // unused — embroidery picker has been removed
+  patternScale: number;        // unused
+  patternRotation: number;     // unused
   fabricPrintSku: string | null;
   locale: string;
 }
 
-const PATTERN_LABELS: Record<string, string> = {
-  "neck-royal": "Royal Neckline",
-  "neck-ornate": "Ornate Neckline",
-  "neck-botanical": "Botanical Vine",
-  "neck-floral": "Floral Neckline",
-  "neck-heritage": "Heritage Panel",
-  "stripes": "Stripes",
-  "chevron": "Chevron",
-  "dots": "Polka Dots",
-  "diamond": "Diamond",
-  "floral-small": "Small Floral",
-  "floral-large": "Large Floral",
-  "arabesque": "Arabesque",
-  "geometric-islamic": "Islamic Geometric",
-  "paisley": "Paisley",
-};
-
 /**
  * Build the WhatsApp message body for a Design Studio configuration.
- * Returns a plain string (not URL-encoded — the caller wraps in whatsappLink()).
+ * Simplified flow: fabric + print only (no embroidery, no colour, no scale).
  */
 export function buildDesignStudioMessage(params: DesignParams): string {
   const lines: string[] = [];
-  lines.push("Hi Loto Fabrics, I'd like you to fulfill this design from your studio:");
+  lines.push("Hi Loto Fabrics, I'd like to enquire about this design from your studio:");
   lines.push("");
   lines.push(`• Fabric: ${capitalize(params.fabricType)}`);
 
@@ -45,19 +28,10 @@ export function buildDesignStudioMessage(params: DesignParams): string {
     } else {
       lines.push(`• Print: ${params.fabricPrintSku}`);
     }
-  } else {
-    lines.push(`• Colour: ${params.baseColor}`);
-  }
-
-  if (params.patternId) {
-    const label = PATTERN_LABELS[params.patternId] ?? params.patternId;
-    lines.push(
-      `• Embroidery: ${label} (scale ${params.patternScale.toFixed(2)}×, rotation ${params.patternRotation}°)`
-    );
   }
 
   lines.push("");
-  lines.push("Could you confirm pricing and lead time? Thanks.");
+  lines.push("Could you confirm availability and lead time? Thanks.");
   return lines.join("\n");
 }
 
@@ -69,7 +43,7 @@ export function buildProductInquiryMessage(productNameEn: string, slug: string):
     `• ${productNameEn}`,
     `• https://lotofabrics.ae/en/products/${slug}`,
     "",
-    "Could you share the price and availability? Thanks.",
+    "Could you share availability and shipping details? Thanks.",
   ].join("\n");
 }
 

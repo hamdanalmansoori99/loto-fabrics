@@ -40,24 +40,24 @@
     "hero_eyebrow": "Loto Fabrics · United Arab Emirates",
     "hero_title_line1": "An heirloom,",
     "hero_title_line2": "stitched by hand.",
-    "hero_subtitle": "Ten-metre bolts of hand-embroidered bridal and occasion cloth, cut to the meter from our Dubai atelier.",
+    "hero_subtitle": "Hand-embroidered mikhwars and everyday jalabiyas, made in our Abu Dhabi atelier.",
     "hero_cta": "Shop the Collection",
     "hero_cta_secondary": "Design Your Fabric",
 
     "trust_1": "Handcrafted in the UAE",
-    "trust_2": "By-the-meter pricing",
+    "trust_2": "Made in Abu Dhabi",
     "trust_3": "Worldwide shipping",
     "trust_4": "Since 2019",
-    "trust_5": "Swatch pack available",
+    "trust_5": "Inquire on WhatsApp",
 
     "lookbook_eyebrow": "Lookbook · Season 04",
     "lookbook_title_pre": "Cloth that",
     "lookbook_title_italic": "carries its own weight.",
     "lookbook_view_all": "View all",
-    "lookbook_card_1": "Eid & Occasion",
-    "lookbook_card_2": "The Pearl Series",
-    "lookbook_card_3": "Bridal · Spring",
-    "lookbook_card_4": "Blush Editions",
+    "lookbook_card_1": "Champagne Heritage",
+    "lookbook_card_2": "Rose Gold Editions",
+    "lookbook_card_3": "Sky Blue Florals",
+    "lookbook_card_4": "Verdant Bloom",
 
     "featured_eyebrow": "Featured",
     "featured_title_pre": "This season's",
@@ -81,7 +81,7 @@
     "journal_eyebrow": "Journal",
     "journal_title_italic": "The story",
     "journal_title_rest": "behind each stitch.",
-    "journal_excerpt": "Every bolt of Loto fabric passes through seven pairs of hands — from the weaver in Como to the zardozi artisan in our Al Quoz studio. We spend two hundred hours on the cloth you will wear once in a lifetime.",
+    "journal_excerpt": "Every Loto piece passes through seven pairs of hands — from the weaver in Como to the zardozi artisan in our Abu Dhabi studio. We spend two hundred hours on the cloth you will wear once in a lifetime.",
     "journal_read": "Read the journal",
 
     "instagram_title": "From the atelier floor.",
@@ -187,6 +187,8 @@
     "neckline": "Neckline embroidery",
     "solid": "Solid",
     "adjustments": "Adjustments",
+    "studio_intro": "Pick a fabric and a print, then send your selection to our atelier on WhatsApp.",
+    "studio_cta_subtitle": "We'll confirm availability, lead time, and pricing.",
     "section_fabric": "Fabric",
     "section_print": "Print Catalog",
     "section_color": "Colour",
@@ -237,7 +239,7 @@
   "about": {
     "title": "The Atelier",
     "story_title": "Our story",
-    "story_text": "Loto Fabrics began in Dubai in 2019, with a bolt of silk and a single zardozi artisan. Today our studio in Al Quoz produces bridal and occasion cloth for clients in 14 countries. We sell by the meter because cloth this rare deserves to be measured, not packaged.",
+    "story_text": "Loto Fabrics began in Abu Dhabi in 2019, with a single bolt of silk and one zardozi artisan. Today our studio produces bridal and occasion mikhwars and everyday jalabiyas for clients across the GCC and beyond.",
     "mission_title": "Our mission",
     "mission_text": "To slow the making of cloth back down — to keep hand embroidery alive through quiet commerce, for people who notice the difference.",
     "quality_title": "Quality promise",
@@ -259,7 +261,7 @@
     "trade_text": "Wholesale, re-seller, and trade clients — please note the nature of your business in your message."
   },
   "footer": {
-    "description": "Heirloom hand-embroidered cloth, cut to the meter. Dubai, UAE.",
+    "description": "Hand-embroidered mikhwars and everyday jalabiyas, made in Abu Dhabi.",
     "quick_links": "Shop",
     "customer_service": "Service",
     "shipping_policy": "Shipping",
@@ -273,6 +275,6 @@
     "newsletter_placeholder": "you@example.com",
     "subscribe": "Subscribe",
     "copyright": "© {year} Loto Fabrics. All rights reserved.",
-    "made_in": "Made in Dubai"
+    "made_in": "Made in Abu Dhabi"
   }
 }

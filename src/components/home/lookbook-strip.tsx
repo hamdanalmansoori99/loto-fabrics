@@ -10,10 +10,10 @@ interface LookbookCard {
 }
 
 const CARDS: LookbookCard[] = [
-  { img: "/images/products/kaftan-champagne-royal.png", titleKey: "lookbook_card_1", href: "/products?collection=occasion" },
-  { img: "/images/products/kaftan-pearl-gold.png",      titleKey: "lookbook_card_2", href: "/products?collection=bridal" },
-  { img: "/images/products/kaftan-peach-blossom.png",   titleKey: "lookbook_card_3", href: "/products?collection=bridal" },
-  { img: "/images/products/kaftan-blush-pink-crystal.png", titleKey: "lookbook_card_4", href: "/products?collection=occasion" },
+  { img: "/images/products/garments/mikhwars/mikhwar-04.png", titleKey: "lookbook_card_1", href: "/products?collection=mikhwar" },
+  { img: "/images/products/garments/mikhwars/mikhwar-13.png", titleKey: "lookbook_card_2", href: "/products?collection=mikhwar" },
+  { img: "/images/products/garments/jalabyas/jalabya-01.png", titleKey: "lookbook_card_3", href: "/products?collection=jalabya" },
+  { img: "/images/products/garments/jalabyas/jalabya-06.png", titleKey: "lookbook_card_4", href: "/products?collection=jalabya" },
 ];
 
 export default async function LookbookStrip() {

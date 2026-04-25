@@ -49,7 +49,7 @@ export default async function DesignStudioTeaser() {
 
         <div className="relative order-1 lg:order-2 aspect-[4/5] lg:aspect-auto">
           <Image
-            src="/images/products/kaftan-white-gold-floral.png"
+            src="/images/products/garments/mikhwars/mikhwar-22.png"
             alt=""
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"

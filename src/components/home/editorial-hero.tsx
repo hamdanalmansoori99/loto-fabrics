@@ -58,7 +58,7 @@ export default function EditorialHero() {
             <div className="mt-16 pt-6 border-t border-border/40 flex items-center gap-4 label-xs text-muted-foreground">
               <span>Season 04 · Spring 2026</span>
               <span className="inline-block w-1 h-1 rounded-full bg-bronze" />
-              <span>Al Quoz · Dubai</span>
+              <span>Abu Dhabi · UAE</span>
             </div>
           </div>
         </div>
@@ -66,13 +66,13 @@ export default function EditorialHero() {
         {/* Right — full kaftan image */}
         <div className="relative overflow-hidden bg-cream-warm">
           <Image
-            src="/images/products/kaftan-burgundy-rose.png"
-            alt="Loto Fabrics — heirloom embroidered kaftan"
+            src="/images/products/garments/mikhwars/mikhwar-15.png"
+            alt="Loto Fabrics — heirloom embroidered mikhwar"
             fill
             priority
             quality={95}
             sizes="60vw"
-            className="object-cover object-[center_25%]"
+            className="object-cover object-[center_top]"
           />
           {/* Subtle cream vignette at edges */}
           <div

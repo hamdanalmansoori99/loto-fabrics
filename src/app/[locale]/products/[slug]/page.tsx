@@ -222,8 +222,8 @@ export default function ProductDetailPage() {
             {isOnRequest && (
               <div className="mb-5">
                 <p
-                  className="display-md italic text-bronze"
-                  style={{ fontVariationSettings: "'SOFT' 100, 'opsz' 32" }}
+                  className="italic text-bronze text-xl"
+                  style={{ fontFamily: "var(--font-display)", fontVariationSettings: "'SOFT' 100, 'opsz' 24" }}
                 >
                   {t("products.price_on_request")}
                 </p>
