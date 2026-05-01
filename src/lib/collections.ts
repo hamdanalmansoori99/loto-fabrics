@@ -2,11 +2,11 @@ import type { Collection, ColorFamily } from "@/types/product";
 
 export const COLLECTIONS: { id: Collection; nameEn: string; nameAr: string; descriptionEn: string; descriptionAr: string }[] = [
   {
-    id: "mikhwar",
-    nameEn: "Mikhwars",
-    nameAr: "مخاوير",
-    descriptionEn: "Hand-embroidered occasion mikhwars, made for the days that matter.",
-    descriptionAr: "مخاوير مطرزة يدوياً للمناسبات المهمة.",
+    id: "thyban",
+    nameEn: "Thybans",
+    nameAr: "ثيبان",
+    descriptionEn: "Hand-embroidered occasion thybans, made for the days that matter.",
+    descriptionAr: "ثيبان مطرزة يدوياً للمناسبات المهمة.",
   },
   {
     id: "jalabya",

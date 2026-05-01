@@ -67,7 +67,7 @@ export default function EditorialHero() {
         <div className="relative overflow-hidden bg-cream-warm">
           <Image
             src="/images/products/garments/mikhwars/mikhwar-15.png"
-            alt="Loto Fabrics — heirloom embroidered mikhwar"
+            alt="Loto Fabrics — heirloom embroidered thyban"
             fill
             priority
             quality={95}
@@ -88,13 +88,13 @@ export default function EditorialHero() {
       {/* ═══ Mobile + tablet full-bleed ═══ */}
       <div className="lg:hidden relative w-full min-h-[92vh] overflow-hidden">
         <Image
-          src="/images/products/kaftan-burgundy-rose.png"
-          alt="Loto Fabrics — heirloom embroidered kaftan"
+          src="/images/products/garments/mikhwars/mikhwar-15.png"
+          alt="Loto Fabrics — heirloom embroidered thyban"
           fill
           priority
           quality={95}
           sizes="100vw"
-          className="object-cover object-[65%_top] sm:object-[70%_top]"
+          className="object-cover object-[center_top]"
         />
 
         <div

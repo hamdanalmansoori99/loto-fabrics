@@ -38,7 +38,7 @@ export default async function Footer() {
                 rel="noopener noreferrer"
                 className="block label-xs text-cream/80 hover:text-cream transition-colors"
               >
-                {tCommon("whatsapp")}: {WHATSAPP_NUMBER_DISPLAY}
+                {tCommon("whatsapp")}: <bdi>{WHATSAPP_NUMBER_DISPLAY}</bdi>
               </a>
               <a
                 href={INSTAGRAM_URL}
@@ -46,7 +46,7 @@ export default async function Footer() {
                 rel="noopener noreferrer"
                 className="block label-xs text-cream/80 hover:text-cream transition-colors"
               >
-                {INSTAGRAM_HANDLE}
+                <bdi>{INSTAGRAM_HANDLE}</bdi>
               </a>
             </div>
           </div>
@@ -56,13 +56,8 @@ export default async function Footer() {
             <h3 className="label-xs text-pink-salt mb-5">{t("quick_links")}</h3>
             <ul className="space-y-3">
               <li>
-                <Link href={`/${locale}/products`} className="text-sm text-cream/80 hover:text-cream transition-colors">
-                  {tCommon("products")}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${locale}/products?collection=mikhwar`} className="text-sm text-cream/80 hover:text-cream transition-colors">
-                  {locale === "ar" ? "مخاوير" : "Mikhwars"}
+                <Link href={`/${locale}/products?collection=thyban`} className="text-sm text-cream/80 hover:text-cream transition-colors">
+                  {locale === "ar" ? "ثيبان" : "Thybans"}
                 </Link>
               </li>
               <li>
@@ -123,7 +118,7 @@ export default async function Footer() {
           </p>
           <div className="flex items-center gap-6">
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="label-xs text-cream/70 hover:text-cream transition-colors">
-              {INSTAGRAM_HANDLE}
+              <bdi>{INSTAGRAM_HANDLE}</bdi>
             </a>
             <a href="#privacy" className="label-xs text-cream/70 hover:text-cream transition-colors">
               {t("privacy_policy")}

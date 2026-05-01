@@ -40,13 +40,13 @@
     "hero_eyebrow": "Loto Fabrics · United Arab Emirates",
     "hero_title_line1": "An heirloom,",
     "hero_title_line2": "stitched by hand.",
-    "hero_subtitle": "Hand-embroidered mikhwars and everyday jalabiyas, made in our Abu Dhabi atelier.",
+    "hero_subtitle": "Hand-embroidered thybans and everyday jalabiyas, made in our Abu Dhabi atelier.",
     "hero_cta": "Shop the Collection",
     "hero_cta_secondary": "Design Your Fabric",
 
     "trust_1": "Handcrafted in the UAE",
     "trust_2": "Made in Abu Dhabi",
-    "trust_3": "Worldwide shipping",
+    "trust_3": "GCC shipping",
     "trust_4": "Since 2019",
     "trust_5": "Inquire on WhatsApp",
 
@@ -72,7 +72,7 @@
     "studio_eyebrow": "Design Studio",
     "studio_title_pre": "Design your own.",
     "studio_title_italic": "Thread by thread.",
-    "studio_body": "See your embroidery previewed on a mikhwar silhouette in real time. Adjust fabric, colour, and pattern, then send your design to our atelier for bespoke production.",
+    "studio_body": "See your embroidery previewed on a thyban silhouette in real time. Adjust fabric, colour, and pattern, then send your design to our atelier for bespoke production.",
     "studio_bullet_1": "Preview on kaftan form or as a flat swatch",
     "studio_bullet_2": "Five heritage neckline embroideries to choose from",
     "studio_bullet_3": "Save designs and share via link",
@@ -127,7 +127,7 @@
     "customize_this": "Customise this fabric",
     "meter_calc_title": "How much do I need?",
     "meter_calc_sub": "Choose a project and we'll estimate a suitable yardage.",
-    "meter_calc_kaftan": "Kaftan / Mikhwar",
+    "meter_calc_kaftan": "Kaftan / Thyban",
     "meter_calc_abaya": "Abaya",
     "meter_calc_top": "Short top / Blouse",
     "meter_calc_runner": "Table runner",
@@ -239,7 +239,7 @@
   "about": {
     "title": "The Atelier",
     "story_title": "Our story",
-    "story_text": "Loto Fabrics began in Abu Dhabi in 2019, with a single bolt of silk and one zardozi artisan. Today our studio produces bridal and occasion mikhwars and everyday jalabiyas for clients across the GCC and beyond.",
+    "story_text": "Loto Fabrics began in Abu Dhabi in 2019, with a single bolt of silk and one zardozi artisan. Today our studio produces bridal and occasion thybans and everyday jalabiyas for clients across the GCC and beyond.",
     "mission_title": "Our mission",
     "mission_text": "To slow the making of cloth back down — to keep hand embroidery alive through quiet commerce, for people who notice the difference.",
     "quality_title": "Quality promise",
@@ -261,7 +261,7 @@
     "trade_text": "Wholesale, re-seller, and trade clients — please note the nature of your business in your message."
   },
   "footer": {
-    "description": "Hand-embroidered mikhwars and everyday jalabiyas, made in Abu Dhabi.",
+    "description": "Hand-embroidered thybans and everyday jalabiyas, made in Abu Dhabi.",
     "quick_links": "Shop",
     "customer_service": "Service",
     "shipping_policy": "Shipping",

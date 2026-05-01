@@ -19,6 +19,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, feature = false, priority = false, className }: ProductCardProps) {
   const t = useTranslations("common");
+  const tProducts = useTranslations("products");
   const locale = useLocale();
   const isSaved = useSavedStore((s) => s.savedIds.includes(product.id));
   const toggleSaved = useSavedStore((s) => s.toggleSaved);
@@ -69,13 +70,13 @@ export default function ProductCard({ product, feature = false, priority = false
         {/* Tags top-left */}
         <div className="absolute top-3 start-3 flex flex-col gap-1.5">
           {product.isNew && (
-            <span className="label-xs bg-cream text-espresso px-2 py-1">New</span>
+            <span className="label-xs bg-cream text-espresso px-2 py-1">{tProducts("new")}</span>
           )}
           {product.isLimited && (
-            <span className="label-xs bg-bronze text-cream px-2 py-1">Limited</span>
+            <span className="label-xs bg-bronze text-cream px-2 py-1">{tProducts("limited")}</span>
           )}
           {product.compareAtPrice && !product.isLimited && (
-            <span className="label-xs bg-bronze text-cream px-2 py-1">Sale</span>
+            <span className="label-xs bg-bronze text-cream px-2 py-1">{tProducts("sale")}</span>
           )}
         </div>
 

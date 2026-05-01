@@ -18,7 +18,14 @@ export default function ProductsPage() {
   const tCommon = useTranslations("common");
   const searchParams = useSearchParams();
 
-  const initialCollection = (searchParams.get("collection") as Collection | null) || null;
+  // Backward-compat: the catalog used to live under `?collection=mikhwar`
+  // before the rename to `thyban`. Map the old value silently so any link
+  // that's still floating around in the wild keeps working.
+  const rawCollection = searchParams.get("collection");
+  const initialCollection: Collection | null =
+    rawCollection === "mikhwar"
+      ? "thyban"
+      : (rawCollection as Collection | null) || null;
 
   // Effective price for filter/sort regardless of priceMode
   const effectivePrice = (p: typeof sampleProducts[number]): number => {

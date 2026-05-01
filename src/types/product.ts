@@ -1,4 +1,4 @@
-export type Collection = "mikhwar" | "jalabya";
+export type Collection = "thyban" | "jalabya";
 
 export type ColorFamily =
   | "cream"

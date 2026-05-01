@@ -52,7 +52,7 @@ function hashSeed(str: string): number {
   return h;
 }
 
-// ── Slender Emirati mikhwar proportions — flowing, tall, elegant ──
+// ── Slender Emirati thyban proportions — flowing, tall, elegant ──
 // Shoulders ≈ body width (no cap-sleeve puff). Sleeves hang straight and
 // flare only at the cuff. Body drops in a gentle column with moderate A-line.
 function getKaftanGeometry(w: number, h: number) {
@@ -93,7 +93,7 @@ function getKaftanGeometry(w: number, h: number) {
 // Backwards-compat alias for neckline-embroidery code that imports this name.
 const getNeckGeometry = getKaftanGeometry;
 
-// ── Slender mikhwar silhouette — flowing vertical column with gentle cuff flare ──
+// ── Slender thyban silhouette — flowing vertical column with gentle cuff flare ──
 function drawJalabiyaPath(ctx: CanvasRenderingContext2D, w: number, h: number) {
   const g = getKaftanGeometry(w, h);
   const { cx, neckTopY, vPointY, shoulderY, shoulderLX, shoulderRX, collarW } = g;
@@ -1135,8 +1135,13 @@ export default function FabricCanvas() {
       ctx.fillRect(-w, -h, w * 3, h * 3);
     }
 
-    // Layer 2: Fabric texture (sheen/weave — works over both solid and print)
-    drawWeaveTexture(ctx, w * 2, h * 2, fabricType, baseColor, rng);
+    // Layer 2: Fabric texture — only on solid colours. When a real Liberty
+    // print is tiled in Layer 1 it already carries its own fabric grain;
+    // adding a synthetic weave on top creates moiré stripes that ruin the
+    // preview, so skip the layer entirely while a print is active.
+    if (!fabricPrintSku || !printImage) {
+      drawWeaveTexture(ctx, w * 2, h * 2, fabricType, baseColor, rng);
+    }
 
     // Layer 3: All-over pattern OR neckline embroidery
     if (patternId && patternId !== "none") {
